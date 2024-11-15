@@ -1,0 +1,12 @@
+local player = game.Players.LocalPlayer
+
+-- Function to make the player say "Skibidi" 10 times
+local function saySkibidi()
+    for i = 1, 10 do
+        game.ReplicatedStorage.DefaultChatSystemChatEvents.SayMessageRequest:FireServer("Skibidi", "All")
+        wait(0.5)  -- Slight delay between messages
+    end
+end
+
+-- Run the function
+saySkibidi()
