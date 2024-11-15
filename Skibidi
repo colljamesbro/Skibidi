@@ -1,12 +1,30 @@
 local player = game.Players.LocalPlayer
+local playerGui = player:WaitForChild("PlayerGui")
 
--- Function to make the player say "Skibidi" 10 times
-local function saySkibidi()
-    for i = 1, 10 do
-        game.ReplicatedStorage.DefaultChatSystemChatEvents.SayMessageRequest:FireServer("Skibidi", "All")
-        wait(0.5)  -- Slight delay between messages
-    end
+-- Create the screen GUI container
+local screenGui = Instance.new("ScreenGui")
+screenGui.Parent = playerGui
+
+-- Create a Frame that will be the side tab
+local sideTab = Instance.new("Frame")
+sideTab.Size = UDim2.new(0, 200, 0, 400)  -- Size of the tab (width, height)
+sideTab.Position = UDim2.new(1, -210, 0, 50)  -- Positioning it on the side of the screen
+sideTab.BackgroundColor3 = Color3.fromRGB(60, 60, 60)
+sideTab.Visible = false  -- Set it to not visible initially
+sideTab.Parent = screenGui
+
+-- Create a button to open/close the tab
+local toggleButton = Instance.new("TextButton")
+toggleButton.Size = UDim2.new(0, 200, 0, 50)
+toggleButton.Position = UDim2.new(0, 0, 0, 20)
+toggleButton.Text = "Open Tab"
+toggleButton.BackgroundColor3 = Color3.fromRGB(0, 0, 255)
+toggleButton.Parent = sideTab
+
+-- Toggle function to show/hide the tab
+local function toggleTab()
+    sideTab.Visible = not sideTab.Visible  -- Toggle visibility of the tab
 end
 
--- Run the function
-saySkibidi()
+-- When the button is clicked, toggle the tab visibility
+toggleButton.MouseButton1Click:Connect(toggleTab)
